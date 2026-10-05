@@ -14,6 +14,9 @@ udp_channel::udp_channel(uint16_t port)
 {
     fd = socket(AF_INET, SOCK_DGRAM, 0);
 
+    send_dst.sin_family = AF_INET;
+    send_dst.sin_port = port;
+    send_dst.sin_addr.s_addr = htonl(loopback_addr);
     if (fd < 0)
     {
         return;
@@ -25,7 +28,6 @@ udp_channel::~udp_channel()
 {
     close(fd);
 }
-
 int udp_channel::send(const void *data, size_t size)
 {
     if (!data)
@@ -33,13 +35,14 @@ int udp_channel::send(const void *data, size_t size)
         return 0;
     }
 
-
+    return sendto(fd, data, size, 0, (struct sockaddr *) &send_dst, sizeof(send_dst));
 }
 
 int udp_channel::receive(void *data, size_t size)
 {
-
+    return recv(fd, data, size, 0);
 }
+
 
 bool udp_channel::subscribe()
 {

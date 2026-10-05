@@ -11,7 +11,6 @@ public:
     udp_channel(uint16_t port);
     ~udp_channel();
 
-
     udp_channel(const udp_channel&) = delete;
     udp_channel& operator=(const udp_channel&) = delete;
 
@@ -22,5 +21,6 @@ public:
 private:
     int fd;
     uint16_t port;
+    struct sockaddr_in send_dst;
 };
 #endif
