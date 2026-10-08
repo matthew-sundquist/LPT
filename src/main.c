@@ -11,7 +11,7 @@ int main()
 
 
     lpt_t *inst = lpt_create(&addr, conn_type);
+
+
     
-    printf("sigma!");
-    return 0;
 }

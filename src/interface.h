@@ -7,6 +7,10 @@
  * C-compatable interface for sending, creating, and receiving messages
  */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct lpt_addr {
     const char *addr;
     size_t len;
@@ -24,6 +28,10 @@ typedef struct lpt lpt_t;
 int lpt_send(lpt_t *endpoint, const void *data, size_t size);
 int lpt_receive(lpt_t *endpoint, void *data, size_t size);
 
-lpt_t *lpt_create(const lpt_addr_t *addr, const lpt_conn_type_t conn_type);
+lpt_t *lpt_create(const lpt_addr_t *addr, lpt_conn_type_t conn_type);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
